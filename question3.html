@@ -15,6 +15,12 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      text-align: center;
+    }
+
+    body>p {
+      font-size: 2rem;
+      font-weight: lighter;
     }
 
     input {
@@ -33,6 +39,21 @@
       margin-left: 10px;
     }
 
+    dialog {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      /* display: flex; */
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
     #continue-btn {
       display: none;
       margin-top: 20px;
@@ -44,34 +65,11 @@
       align-items: center;
       margin-top: 5px;
     }
-
-    #success-message,
-    #error-message {
-      margin-top: 10px;
-      font-size: 1rem;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
-    }
-
-    #success-message {
-      background-color: #5cb85c;
-      /* Green background for success */
-      color: #fff;
-    }
-
-    #error-message {
-      background-color: #d9534f;
-      /* Red background for error */
-      color: #fff;
-    }
   </style>
 </head>
 
 <body>
-  <p id="success-message"></p>
-  <p id="error-message"></p>
-  <h1>Where did we have our first volcano?</h1>
+  <p>Where did we have our first volcano?</p>
 
   <div class="input-container">
     <input type="text" id="answerInput" placeholder="Type here...">
@@ -80,28 +78,32 @@
 
   <button id="continue-btn" onclick="continueQuiz()">Continue</button>
 
+  <dialog id="d" open>
+    <p>Lets gooooo! Your answer is correct!</p>
+    <form method="dialog">
+      <button onclick="continueQuiz()">Continue</button>
+    </form>
+  </dialog>
+
+  <dialog id="d1" open>
+    <p>Sorry love, you have to try again...</p>
+    <form method="dialog">
+      <button onclick="tryAgain()">Try again</button>
+    </form>
+  </dialog>
+
   <script>
     function checkAnswer() {
       var userAnswer = document.getElementById('answerInput').value.toLowerCase();
-      var successMessage = document.getElementById('success-message');
-      var errorMessage = document.getElementById('error-message');
+      var dialog = document.getElementById('d');
+      var try1 = document.getElementById('d1');
       var continueBtn = document.getElementById('continue-btn');
       var checkAnswerBtn = document.getElementById('checkAnswerBtn');
 
-      successMessage.style.display = 'none';
-      errorMessage.style.display = 'none';
-
       if (userAnswer === 'Patones' || userAnswer === 'patones') {
-        successMessage.textContent = 'Lets gooooo! Your answer is correct!';
-        //errorMessage.textContent = '';
-        continueBtn.style.display = 'block';
-        successMessage.style.display = 'block';
-        checkAnswerBtn.style.display = 'none'; // Hide the "Check Answer" button
+        dialog.style.display = 'flex';
       } else {
-        errorMessage.textContent = 'Sorry love, you have to try again...';
-        successMessage.textContent = '';
-        continueBtn.style.display = 'none';
-        errorMessage.style.display = 'block';
+        try1.style.display = 'flex';
       }
     }
 
@@ -109,6 +111,11 @@
       // alert('Congratulations! You can continue the quiz.');
       // Add any logic for further actions after correct answer
       window.location.href = 'index2.html';
+    }
+    function tryAgain() {
+      // alert('Congratulations! You can continue the quiz.');
+      // Add any logic for further actions after correct answer
+      window.location.href = 'question3.html';
     }
   </script>
 

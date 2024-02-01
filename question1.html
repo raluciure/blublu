@@ -15,6 +15,12 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      text-align: center;
+    }
+
+    body>p {
+      font-size: 2rem;
+      font-weight: lighter;
     }
 
     input {
@@ -32,16 +38,6 @@
       border-radius: 5px;
       margin-left: 10px;
     }
-
-    /* dialog {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    } */
 
     dialog {
       display: none;
@@ -69,50 +65,12 @@
       align-items: center;
       margin-top: 5px;
     }
-
-    #success-message,
-    #error-message {
-      margin-top: 10px;
-      font-size: 1rem;
-      padding: 10px;
-      border-radius: 5px;
-      display: none;
-    }
-
-    #success-message {
-      background-color: #5cb85c;
-      /* Green background for success */
-      color: #fff;
-    }
-
-    #error-message {
-      background-color: #d9534f;
-      /* Red background for error */
-      color: #fff;
-    }
-
-    .overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-      z-index: 1; /* Ensure the overlay is above other elements */
-      display: none;
-    }
-
-    /* Add class 'active' to display the overlay */
-    .overlay.active {
-      display: block;
-    }
   </style>
 </head>
 
 <body>
-  <p id="success-message"></p>
-  <p id="error-message"></p>
-  <h1>On which day of April was our first kiss?</h1>
+
+  <p>On which day of April was our first kiss?</p>
 
   <div class="input-container">
     <input type="text" id="answerInput" placeholder="Type here...">
@@ -120,8 +78,6 @@
   </div>
 
   <button id="continue-btn" onclick="continueQuiz()">Continue</button>
-
-  <div class="overlay"></div>
 
   <dialog id="d" open>
     <p>Lets gooooo! Your answer is correct!</p>
@@ -140,25 +96,10 @@
   <script>
     function checkAnswer() {
       var userAnswer = document.getElementById('answerInput').value.toLowerCase();
-      var successMessage = document.getElementById('success-message');
-      var errorMessage = document.getElementById('error-message');
       var dialog = document.getElementById('d');
       var try1 = document.getElementById('d1');
       var continueBtn = document.getElementById('continue-btn');
       var checkAnswerBtn = document.getElementById('checkAnswerBtn');
-
-      var overlay = document.querySelector('.overlay');
-
-      dialog.addEventListener('show', function () {
-        overlay.classList.add('active');
-      });
-
-      dialog.addEventListener('close', function () {
-        overlay.classList.remove('active');
-      });
-
-      successMessage.style.display = 'none';
-      errorMessage.style.display = 'none';
 
       if (userAnswer === '27') {
         dialog.style.display = 'flex';
